@@ -9,7 +9,8 @@ Some Sh*tty Interpreter
 - [x] Addition And Subtraction
 - [x] Multiplication And Division
 - [x] Basic Operator Precedence (+, -, *, /)
-- [ ] Parenthesis Precedence
+- [x] Parenthesis Precedence
+- [ ] Some Graph Things? (srsly whats this)
 
 ## To Do List (Interpreter)
 

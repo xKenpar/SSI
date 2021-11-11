@@ -1,6 +1,6 @@
 #include "bits/stdc++.h"
 
-enum tokenType {INTEGER, PLUS, MINUS, MULT, DIV, EOFILE};
+enum tokenType {INTEGER, PLUS, MINUS, MULT, DIV, LPAREN, RPAREN, EOFILE};
 
 class TOKEN
 {

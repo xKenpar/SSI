@@ -92,6 +92,18 @@ TOKEN SSI::getNextToken()
 
             return TOKEN(DIV, '/');
         }
+        else if(currentChar == '(')
+        {
+            advance();
+
+            return TOKEN(LPAREN, '(');
+        }
+        else if(currentChar == ')')
+        {
+            advance();
+
+            return TOKEN(RPAREN, ')');
+        }
 
         error("Unexpected Char At Index " + std::to_string(pos) + "!\nChar : " + currentChar);
     }
@@ -164,9 +176,26 @@ int SSI::factor()
 {
     TOKEN token = currentToken;
 
-    eat(INTEGER);
+    if(token.type == INTEGER)
+    {
+        eat(INTEGER);
 
-    return token.value;
+        return token.value;
+    }
+    else if(token.type == LPAREN)
+    {
+        eat(LPAREN);
+
+        int result = expr();
+
+        eat(RPAREN);
+
+        return result;
+    }
+    else
+    {
+        error("Unexpected Token");
+    }
 }
 
 int SSI::toInt(char ch)
