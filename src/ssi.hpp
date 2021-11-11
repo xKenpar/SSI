@@ -27,7 +27,8 @@ class SSI
         TOKEN getNextToken();
         int getInt();
         int toInt(char ch);
-        int getTerm();
+        int term();
+        int factor();
 
     public:
         SSI(std::string newText);

@@ -8,7 +8,8 @@ Some Sh*tty Interpreter
 - [x] Basic Operations And Basic Parser
 - [x] Addition And Subtraction
 - [x] Multiplication And Division
-- [ ] Operator Precedence
+- [x] Basic Operator Precedence (+, -, *, /)
+- [ ] Parenthesis Precedence
 
 ## To Do List (Interpreter)
 

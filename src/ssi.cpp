@@ -12,6 +12,7 @@ SSI::SSI(std::string text)
     this->text = text;
     pos = 0;
     currentChar = text[pos];
+    currentToken = getNextToken();
 }
 
 void SSI::advance()
@@ -110,13 +111,35 @@ void SSI::eat(tokenType eatType)
     }
 }
 
-int SSI::expr()
+int SSI::term()
 {
-    currentToken = getNextToken();
+    int result = factor();
 
-    int result = getTerm();
+    while(currentToken.type == MULT || currentToken.type == DIV)
+    {
+        TOKEN op = currentToken;
 
-    while(currentToken.type == PLUS || currentToken.type == MINUS || currentToken.type == MULT || currentToken.type == DIV)
+        if(currentToken.type == MULT)
+        {
+            eat(MULT);
+
+            result = result * factor();
+        }
+        else if(currentToken.type == DIV)
+        {
+            eat(DIV);
+
+            result = result / term();
+        }
+    }
+
+    return result;
+}
+int SSI::expr()
+{   
+    int result = term();
+
+    while(currentToken.type == PLUS || currentToken.type == MINUS)
     {
         TOKEN op = currentToken;
 
@@ -124,36 +147,20 @@ int SSI::expr()
         {
             eat(PLUS);
 
-            result = result + getTerm();
+            result = result + term();
         }
         else if(currentToken.type == MINUS)
         {
             eat(MINUS);
 
-            result = result - getTerm();
-        }
-        else if(currentToken.type == MULT)
-        {
-            eat(MULT);
-
-            result = result * getTerm();
-        }
-        else if(currentToken.type == DIV)
-        {
-            eat(DIV);
-
-            result = result / getTerm();
-        }
-        else
-        {
-            error("Unexpected Token");
+            result = result - term();
         }
     }
 
     return result;
 }
 
-int SSI::getTerm()
+int SSI::factor()
 {
     TOKEN token = currentToken;
 
