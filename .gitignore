@@ -1,3 +1,11 @@
+# Files That Doesn't Have An Extension (Some Linux Crap)
+*
+!*/
+!*.*
+
+# Vscode Config FOlder
+.vscode
+
 # Prerequisites
 *.d
 
