@@ -10,7 +10,6 @@ class TOKEN
 
         TOKEN(){};
         TOKEN(tokenType type, int value);
-        
 };
 
 class SSI

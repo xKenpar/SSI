@@ -7,7 +7,7 @@ Some Sh*tty Interpreter
 - [x] Header Files 
 - [x] Basic Operations And Basic Parser
 - [x] Addition And Subtraction
-- [ ] Multiplication And Division
+- [x] Multiplication And Division
 - [ ] Operator Precedence
 
 ## To Do List (Interpreter)

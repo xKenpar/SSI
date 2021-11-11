@@ -79,8 +79,20 @@ TOKEN SSI::getNextToken()
 
             return TOKEN(MINUS, '-');
         }
+        else if(currentChar == '*')
+        {
+            advance();
 
-        error("Unexpected Char");
+            return TOKEN(MULT, '*');
+        }
+        else if(currentChar == '/')
+        {
+            advance();
+
+            return TOKEN(DIV, '/');
+        }
+
+        error("Unexpected Char At Index " + std::to_string(pos) + "!\nChar : " + currentChar);
     }
 
     return TOKEN(EOFILE, 0);
@@ -104,7 +116,7 @@ int SSI::expr()
 
     int result = getTerm();
 
-    while(currentToken.type == PLUS || currentToken.type == MINUS)
+    while(currentToken.type == PLUS || currentToken.type == MINUS || currentToken.type == MULT || currentToken.type == DIV)
     {
         TOKEN op = currentToken;
 
@@ -119,6 +131,18 @@ int SSI::expr()
             eat(MINUS);
 
             result = result - getTerm();
+        }
+        else if(currentToken.type == MULT)
+        {
+            eat(MULT);
+
+            result = result * getTerm();
+        }
+        else if(currentToken.type == DIV)
+        {
+            eat(DIV);
+
+            result = result / getTerm();
         }
         else
         {
